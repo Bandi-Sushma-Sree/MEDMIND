@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Evidence-Based Home Remedies</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      :root{
+        /* Color system: primary + neutrals + one accent (max 5 total) */
+        --brand-primary:#0d6efd; /* Bootstrap primary */
+        --neutral-0:#ffffff;
+        --neutral-900:#0b1220;
+        --neutral-600:#5b6474;
+        --accent:#20c997; /* teal */
+      }
+
+      html, body { height: 100%; }
+      body {
+        color: var(--neutral-900);
+        background-color: var(--neutral-0);
+        line-height: 1.6;
+      }
+
+      /* Hero with image background + overlay */
+      .hero {
+        position: relative;
+        min-height: 60vh;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        color: #fff;
+        background-image:
+          linear-gradient( rgba(11,18,32,0.55), rgba(11,18,32,0.55) ),
+          url('https://i.pinimg.com/736x/79/9f/e3/799fe3d9d71907db67bc0c77f9f475b7.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+      }
+      .hero h1 { letter-spacing: -0.02em; }
+      .hero .lead { max-width: 60ch; margin: 0 auto; color: #e8ecf3; }
+
+      /* Subnav (anchor) */
+      .subnav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: blur(8px);
+        background-color: rgba(255,255,255,0.8);
+        border-bottom: 1px solid rgba(13,110,253,0.12);
+      }
+      .subnav .nav-link {
+        color: var(--neutral-900);
+        font-weight: 600;
+      }
+      .subnav .nav-link:hover,
+      .subnav .nav-link:focus {
+        color: var(--brand-primary);
+      }
+
+      /* Glass cards */
+      .card-glass {
+        background: rgba(255,255,255,0.75);
+        border: 1px solid rgba(13,110,253,0.12);
+        box-shadow: 0 6px 20px rgba(11,18,32,0.08);
+        backdrop-filter: blur(6px);
+      }
+
+      /* Section backgrounds */
+      .section-bg {
+        position: relative;
+        background-size: cover;
+        background-position: center;
+      }
+      .section-bg::before {
+        content: '';
+        position: absolute; inset: 0;
+        background: linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,255,255,0.9));
+      }
+      .section-inner { position: relative; }
+
+      /* Badges */
+      .badge-evidence { background: var(--accent); }
+      .badge-caution { background: #ff6b6b; }
+
+      /* Small helper styles */
+      .checklist li::marker { color: var(--brand-primary); }
+      .img-cover {
+        object-fit: cover;
+        width: 100%;
+        height: 180px;
+        border-top-left-radius: .5rem;
+        border-top-right-radius: .5rem;
+      }
+
+      /* Footer */
+      footer {
+        background: var(--neutral-900);
+        color: #cfd6e4;
+      }
+
+      /* Improve details/summary */
+      details summary {
+        cursor: pointer;
+        font-weight: 600;
+        list-style: none;
+      }
+      details summary::-webkit-details-marker { display: none; }
+      details[open] summary { color: var(--brand-primary); }
+    </style>
+  </head>
+
+  <body>
+    
+    <header class="py-3 border-bottom">
+      <div class="container d-flex flex-wrap align-items-center justify-content-between gap-2">
+        <a class="navbar-brand fw-bold text-decoration-none" href="#">
+          Home Remedies
+        </a>
+        <nav class="d-none d-md-flex gap-3">
+          <a class="link-dark fw-semibold text-decoration-none" href="#overview">Overview</a>
+          <a class="link-dark fw-semibold text-decoration-none" href="#remedies">Remedies</a>
+          
+        </nav>
+      </div>
+    </header>
+    <section class="hero">
+      <div class="container px-4">
+        <span class="badge rounded-pill bg-light text-dark mb-3">Evidence-informed</span>
+        <h1 class="display-4 fw-bold mb-3">Evidence-Based Home Remedies</h1>
+        <p class="lead mb-4">
+          Safe, simple, and practical options backed by clinical research and public health guidance.
+          Always consider your personal health conditions and consult a professional when needed.
+        </p>
+        <a href="#remedies" class="btn btn-lg btn-primary shadow">Explore Remedies</a>
+      </div>
+    </section>
+    <nav class="subnav">
+      <div class="container">
+        <ul class="nav py-2 justify-content-center justify-content-md-start">
+          <li class="nav-item"><a class="nav-link" href="#overview">Overview</a></li>
+          <li class="nav-item"><a class="nav-link" href="#respiratory">Respiratory</a></li>
+          <li class="nav-item"><a class="nav-link" href="#digestion">Digestion</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pain">Headache & Pain</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skin">Skin</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sleep">Sleep</a></li>
+          
+        </ul>
+      </div>
+    </nav>
+    <section id="overview" class="py-5 section-bg" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDQRWMclJLVrFTB8GyLdoXnVLq-OzXsBbPsA&s')">
+      <div class="section-inner">
+        <div class="container">
+          <div class="row g-4 align-items-stretch">
+            <div class="col-md-6">
+              <div class="p-4 p-lg-5 card-glass rounded-3 h-100">
+                <h2 class="h3 fw-bold mb-3">How to Use This Guide</h2>
+                <ul class="checklist mb-0">
+                  <li class="mb-2"><strong>Start with safety:</strong> Check for allergies, age restrictions (e.g., no honey under age 1), and medication interactions.</li>
+                  <li class="mb-2"><strong>Follow evidence level:</strong> Each remedy shows an “Evidence” badge to set realistic expectations.</li>
+                  <li class="mb-2"><strong>Track your response:</strong> Note what helps, any side effects, and when symptoms change.</li>
+                  <li><strong>Know when to seek care:</strong> If symptoms are severe, persistent, or unusual, contact a healthcare professional.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="p-4 p-lg-5 card-glass rounded-3 h-100">
+                <h2 class="h3 fw-bold mb-3">General Principles</h2>
+                <p class="mb-3">
+                  Home remedies can complement medical care but do not replace clinical evaluation when indicated.
+                  Hydration, rest, balanced diet, and gentle activity often support recovery across conditions.
+                </p>
+                <div class="d-flex flex-wrap gap-2">
+                  <span class="badge badge-evidence">Evidence: Strong</span>
+                  <span class="badge text-bg-primary">Evidence: Moderate</span>
+                  <span class="badge text-bg-secondary">Evidence: Limited</span>
+                  <span class="badge badge-caution">Safety Note</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main id="remedies" class="py-5">
+      <div class="container">
+
+        <section id="respiratory" class="mb-5">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <h3 class="fw-bold mb-0">Respiratory: Colds, Cough, Sore Throat</h3>
+            <span class="badge text-bg-primary">Category</span>
+          </div>
+          <div class="row g-4">
+            
+            <div class="col-md-6 col-lg-4">
+              <article class="card card-glass h-100">
+                <img class="img-cover" src="https://i.pinimg.com/736x/33/35/f8/3335f811f1435163ea69bf32187a7bbe.jpg" alt="Honey in a jar with dipper" />
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="card-title mb-1">Honey for Night Cough</h5>
+                    <span class="badge badge-evidence">Evidence: Strong</span>
+                  </div>
+                  <p class="card-text mb-2">
+                    1–2 teaspoons of honey before bed may reduce nighttime cough frequency and improve sleep quality in older children and adults.
+                  </p>
+                  <p class="small text-muted mb-0">
+                    Safety: <strong class="badge-caution px-2 py-1 rounded-pill">No honey under 1 year</strong> due to botulism risk.
+                  </p>
+                </div>
+              </article>
+            </div> 
+            <div class="col-md-6 col-lg-4">
+              <article class="card card-glass h-100">
+                <img class="img-cover" src="https://i.pinimg.com/1200x/b8/d9/73/b8d9739c9d434f53dec9e18cf05b6cce.jpg" alt="Glass of water and salt" />
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="card-title mb-1">Warm Saltwater Gargle</h5>
+                    <span class="badge text-bg-primary">Evidence: Moderate</span>
+                  </div>
+                  <p class="card-text mb-2">
+                    Gargling warm saltwater (½ tsp salt in a cup of warm water) can ease sore throat discomfort by reducing swelling and loosening mucus.
+                  </p>
+                  <p class="small text-muted mb-0">Safety: Avoid swallowing; not for young children who can’t gargle safely.</p>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <article class="card card-glass h-100">
+                <img class="img-cover" src="https://i.pinimg.com/1200x/da/45/0b/da450bf3a24436e5cc2780940923f957.jpg" alt="Steam from hot water" />
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="card-title mb-1">Steam Inhalation</h5>
+                    <span class="badge text-bg-secondary">Evidence: Limited</span>
+                  </div>
+                  <p class="card-text mb-2">
+                    Gentle warm steam may temporarily relieve nasal congestion and throat dryness.
+                  </p>
+                  <p class="small text-muted mb-0">Safety: Avoid burns; keep hot water out of reach of children.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+        <section id="digestion" class="mb-5">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <h3 class="fw-bold mb-0">Digestion: Nausea, Indigestion</h3>
+            <span class="badge text-bg-primary">Category</span>
+          </div>
+          <div class="row g-4">
+            
+            <div class="col-md-6 col-lg-4">
+              <article class="card card-glass h-100">
+                <img class="img-cover" src="https://i.pinimg.com/736x/dc/25/1a/dc251af80d9a20c51999bbed816ef02e.jpg" alt="Fresh ginger and tea" />
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="card-title mb-1">Ginger for Nausea</h5>
+                    <span class="badge text-bg-primary">Evidence: Moderate</span>
+                  </div>
+                  <p class="card-text mb-2">
+                    Ginger tea or standardized capsules can help reduce mild nausea (e.g., motion sickness, postoperative).
+                  </p>
+                  <p class="small text-muted mb-0">Safety: May interact with anticoagulants; consult if on blood thinners.</p>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <article class="card card-glass h-100">
+                <img class="img-cover" src="https://i.pinimg.com/1200x/08/6d/29/086d297c5921b4f91987fbc98012894e.jpg" alt="Peppermint leaves and tea" />
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="card-title mb-1">Peppermint for Indigestion</h5>
+                    <span class="badge text-bg-secondary">Evidence: Limited</span>
+                  </div>
+                  <p class="card-text mb-2">
+                    Peppermint tea or enteric-coated oil may ease functional dyspepsia or IBS-related discomfort in some people.
+                  </p>
+                  <p class="small text-muted mb-0">Safety: May worsen reflux; avoid in known GERD without guidance.</p>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <article class="card card-glass h-100">
+                <img class="img-cover" src="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?q=80&w=1200&auto=format&fit=crop" alt="Light meal with vegetables" />
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="card-title mb-1">Small, Simple Meals</h5>
+                    <span class="badge text-bg-primary">Evidence: Moderate</span>
+                  </div>
+                  <p class="card-text mb-2">
+                    Eating smaller, bland meals (e.g., bananas, rice, applesauce, toast) may reduce nausea and indigestion.
+                  </p>
+                  <p class="small text-muted mb-0">Safety: Maintain hydration; seek care if persistent vomiting or dehydration.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+        <section id="pain" class="mb-5">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <h3 class="fw-bold mb-0">Headache & Mild Pain</h3>
+            <span class="badge text-bg-primary">Category</span>
+          </div>
+          <div class="row g-4">
+             
+            <div class="col-md-6 col-lg-4">
+              <article class="card card-glass h-100">
+                <img class="img-cover" src="https://i.pinimg.com/736x/75/4f/9d/754f9dc1239f9baf9e480d914fcbcad6.jpg" alt="Glass of water" />
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="card-title mb-1">Hydration & Brief Rest</h5>
+                    <span class="badge text-bg-primary">Evidence: Moderate</span>
+                  </div>
+                  <p class="card-text mb-2">
+                    Dehydration and eyestrain are common triggers. Water, a short break, and gentle neck/shoulder stretching can help tension-type headaches.
+                  </p>
+                  <p class="small text-muted mb-0">Safety: Seek urgent care for severe, sudden, or neurologic-symptom headaches.</p>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <article class="card card-glass h-100">
+                <img class="img-cover" src="https://i.pinimg.com/1200x/60/dc/84/60dc84f876a78e221c89c53d7c7b6263.jpg" alt="Small bottle of essential oil" />
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="card-title mb-1">Peppermint Oil (Topical)</h5>
+                    <span class="badge text-bg-primary">Evidence: Moderate</span>
+                  </div>
+                  <p class="card-text mb-2">
+                    Diluted peppermint oil applied to temples/forehead may relieve tension-type headache in some adults.
+                  </p>
+                  <p class="small text-muted mb-0">Safety: Patch test; avoid eyes; not for young children without guidance.</p>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <article class="card card-glass h-100">
+                <img class="img-cover" src="https://images.unsplash.com/photo-1459755486867-b55449bb39ff?q=80&w=1200&auto=format&fit=crop" alt="Cup of tea or coffee" />
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="card-title mb-1">Tea/Caffeine (Moderate)</h5>
+                    <span class="badge text-bg-secondary">Evidence: Limited</span>
+                  </div>
+                  <p class="card-text mb-2">
+                    A modest amount of caffeine can enhance relief for some tension headaches; avoid late-day use to protect sleep.
+                  </p>
+                  <p class="small text-muted mb-0">Safety: Limit if sensitive to palpitations, anxiety, or reflux.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+        <section id="skin" class="mb-5">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <h3 class="fw-bold mb-0">Skin: Mild Acne & Irritation</h3>
+            <span class="badge text-bg-primary">Category</span>
+          </div>
+          <div class="row g-4">
+         
+            <div class="col-md-6 col-lg-4">
+              <article class="card card-glass h-100">
+                <img class="img-cover" src="https://i.pinimg.com/736x/96/8f/0b/968f0b07acd926f7e3c3eb7e782c6126.jpg" alt="Foam cleanser in hand" />
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="card-title mb-1">Gentle Cleansing</h5>
+                    <span class="badge text-bg-primary">Evidence: Moderate</span>
+                  </div>
+                  <p class="card-text mb-2">
+                    Twice-daily washing with a mild, non-comedogenic cleanser can reduce oil and surface debris associated with mild acne.
+                  </p>
+                  <p class="small text-muted mb-0">Safety: Avoid harsh scrubs that can worsen irritation.</p>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <article class="card card-glass h-100">
+                <img class="img-cover" src="https://images.unsplash.com/photo-1498843053639-170ff2122f35?q=80&w=1200&auto=format&fit=crop" alt="Tea tree leaves and bottle" />
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="card-title mb-1">Diluted Tea Tree Oil</h5>
+                    <span class="badge text-bg-secondary">Evidence: Limited</span>
+                  </div>
+                  <p class="card-text mb-2">
+                    Spot application of properly diluted tea tree oil may help mild inflammatory acne in some users.
+                  </p>
+                  <p class="small text-muted mb-0">Safety: Patch test; avoid undiluted use; discontinue if irritation occurs.</p>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <article class="card card-glass h-100">
+                <img class="img-cover" src="https://i.pinimg.com/1200x/2f/ff/dc/2fffdca4a690da834a5e01785944c3b2.jpg" alt="Cream jar and leaf" />
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="card-title mb-1">Light, Non‑comedogenic Moisturizer</h5>
+                    <span class="badge text-bg-primary">Evidence: Moderate</span>
+                  </div>
+                  <p class="card-text mb-2">
+                    Maintaining the skin barrier with a lightweight, non‑comedogenic moisturizer can reduce irritation from over‑cleansing.
+                  </p>
+                  <p class="small text-muted mb-0">Safety: Fragrance‑free preferred for sensitive skin.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+        <section id="sleep" class="mb-4">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <h3 class="fw-bold mb-0">Sleep: Trouble Falling Asleep</h3>
+            <span class="badge text-bg-primary">Category</span>
+          </div>
+          <div class="row g-4">
+            
+            <div class="col-md-6 col-lg-4">
+              <article class="card card-glass h-100">
+                <img class="img-cover" src="https://i.pinimg.com/1200x/49/9f/7d/499f7dcf23ef21a7dc0a8780b7129967.jpg" alt="Dark cozy bedroom" />
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="card-title mb-1">Sleep Routine & Light</h5>
+                    <span class="badge text-bg-primary">Evidence: Moderate</span>
+                  </div>
+                  <p class="card-text mb-2">
+                    Consistent bedtime/wake time, minimizing screens pre-bed, and getting morning daylight can improve sleep onset for many people.
+                  </p>
+                  <p class="small text-muted mb-0">Safety: If snoring, apneas, or insomnia persists, seek evaluation.</p>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <article class="card card-glass h-100">
+                <img class="img-cover" src="https://i.pinimg.com/736x/04/90/bc/0490bc41f53df8adca48193d1c0f2d1e.jpg" alt="Cup of chamomile tea" />
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="card-title mb-1">Chamomile Tea</h5>
+                    <span class="badge text-bg-secondary">Evidence: Limited</span>
+                  </div>
+                  <p class="card-text mb-2">
+                    A warm, caffeine-free chamomile tea before bed is a gentle ritual that may support relaxation.
+                  </p>
+                  <p class="small text-muted mb-0">Safety: Check for ragweed allergy cross-reactivity.</p>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <article class="card card-glass h-100">
+                <img class="img-cover" src="https://i.pinimg.com/1200x/36/95/ff/3695ff6eae4eb69587acf21678789013.jpg" alt="Notebook and pen for journaling" />
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="card-title mb-1">Wind‑Down Journal</h5>
+                    <span class="badge text-bg-secondary">Evidence: Limited</span>
+                  </div>
+                  <p class="card-text mb-2">
+                    Writing a quick to‑do list or gratitude notes can reduce cognitive arousal and make it easier to fall asleep.
+                  </p>
+                  <p class="small text-muted mb-0">Safety: Combine with a consistent routine for best effect.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+        <section class="mb-5">
+          <div class="p-4 p-lg-5 card-glass rounded-3">
+            <h4 class="fw-bold mb-3">Important Safety Notes</h4>
+            <ul class="mb-3">
+              <li>This page is for general information only and not a substitute for professional medical advice, diagnosis, or treatment.</li>
+              <li>Evidence ratings are simplified; individual responses vary. If symptoms are severe, persistent, or unusual, seek care promptly.</li>
+              <li>Children, pregnant/breastfeeding individuals, and those with chronic conditions or on medications should consult a clinician before trying remedies.</li>
+            </ul>
+            <p class="small text-muted mb-0">
+              Example reference bodies: World Health Organization, CDC, Cochrane Reviews, and NIH resources. Consult clinicians and reputable guidelines for personalized recommendations.
+            </p>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <footer class="py-4">
+      <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+        <p class="mb-0 small">© <span id="year"></span> Home Remedies – Educational purposes only.</p>
+        <div class="d-flex gap-3 small">
+          <a class="link-light text-decoration-none" href="#overview">Overview</a>
+          <a class="link-light text-decoration-none" href="#remedies">Remedies</a>
+          
+        </div>
+      </div>
+    </footer>
+
+    
+    <script>
+      // Optional: This tiny inline script can be removed if you prefer zero JS.
+      // It only sets the current year for the footer.
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

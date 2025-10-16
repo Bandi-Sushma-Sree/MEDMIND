@@ -1,0 +1,765 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MEDMIND</title>
+ 
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root{
+        --brand: #2563eb;     /* primary blue */
+        --accent: #6366f1;    /* indigo accent */
+        --text: #0f172a;      /* slate-900 */
+        --muted: #64748b;     /* slate-500/600 */
+        --bg: #f8fafc;        /* slate-50 */
+        --soft: #eef6ff;      /* very light blue */
+        --card: #ffffff;
+        --border: #e2e8f0;
+        --radius: 1rem;
+      }
+
+      html, body { background: var(--bg); color: var(--text); }
+
+      /* Layout helpers */
+      .section { padding: 4rem 0; }
+      .section-sm { padding: 2.5rem 0; }
+
+      /* Cards */
+      .card-soft {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--card);
+        box-shadow: 0 4px 20px rgba(2, 6, 23, 0.06);
+      }
+      .shadow-soft { box-shadow: 0 6px 28px rgba(2, 6, 23, 0.08); }
+
+      /* Buttons */
+      .btn-brand {
+        --bs-btn-bg: var(--brand);
+        --bs-btn-border-color: var(--brand);
+        --bs-btn-hover-bg: #1e4fd8;
+        --bs-btn-hover-border-color: #1e4fd8;
+        --bs-btn-color: #fff;
+        border-radius: 999px;
+        padding: .65rem 1.25rem;
+        font-weight: 600;
+      }
+      .btn-outline-brand {
+        --bs-btn-color: var(--brand);
+        --bs-btn-border-color: var(--brand);
+        --bs-btn-hover-bg: var(--brand);
+        --bs-btn-hover-border-color: var(--brand);
+        --bs-btn-hover-color: #fff;
+        border-radius: 999px;
+        padding: .65rem 1.25rem;
+        font-weight: 600;
+      }
+      .btn-accent {
+        --bs-btn-bg: var(--accent);
+        --bs-btn-border-color: var(--accent);
+        --bs-btn-hover-bg: #5156e6;
+        --bs-btn-hover-border-color: #5156e6;
+        --bs-btn-color: #fff;
+        border-radius: 999px;
+        padding: .65rem 1.25rem;
+        font-weight: 600;
+      }
+
+      /* Hero */
+      .hero {
+        position: relative;
+        background: radial-gradient(1200px 600px at 85% -10%, #e8f1ff 0%, rgba(232,241,255,0) 60%);
+      }
+      .badge-soft {
+        background: var(--soft);
+        color: var(--brand);
+        border: 1px solid #dbeafe;
+        border-radius: 999px;
+        font-weight: 600;
+      }
+      .hero-figure {
+        border-radius: 1.25rem;
+        background: linear-gradient(180deg, #ffffff 0%, #f1f5ff 100%);
+        border: 1px solid var(--border);
+      }
+
+      /* Logo strip */
+      .logo-pill {
+        border: 1px dashed var(--border);
+        background: #fff;
+        padding: .5rem .75rem;
+        border-radius: 999px;
+        font-weight: 600;
+        color: var(--muted);
+      }
+
+      /* Feature icons */
+      .feature-icon {
+        width: 44px; height: 44px;
+        display: inline-grid; place-items: center;
+        border-radius: 12px;
+        color: #fff;
+        background: var(--brand);
+      }
+      .feature-icon.secondary { background: var(--accent); }
+      .check-icon {
+        color: var(--brand);
+      }
+
+      /* Pricing */
+      .price {
+        font-size: 2.25rem;
+        font-weight: 800;
+        color: var(--brand);
+      }
+      .plan-name { font-weight: 700; }
+
+      /* Testimonials */
+      .avatar {
+        width: 44px; height: 44px; border-radius: 50%;
+        background: #dbeafe;
+      }
+
+      /* FAQ */
+      .accordion-button:not(.collapsed){ color: var(--brand); }
+
+      /* CTA banner */
+      .cta {
+        background: #eef6ff;
+        border: 1px solid var(--border);
+        border-radius: 1.25rem;
+      }
+/* Enhanced CTA Section */
+.cta-hero {
+  background: linear-gradient(135deg, #eef6ff 0%, #dbeafe 100%);
+  border: 1px solid var(--border);
+  border-radius: 1.5rem;
+  position: relative;
+}
+
+.cta-robot {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2rem;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+  z-index: 2;
+}
+
+.cta-robot-left {
+  top: 20px;
+  left: 30px;
+  transform: rotate(-10deg);
+}
+
+.cta-robot-right {
+  top: 20px;
+  right: 30px;
+  transform: rotate(10deg);
+}
+
+.cta-float {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.1);
+  z-index: 1;
+}
+
+.cta-float-1 {
+  width: 40px;
+  height: 40px;
+  top: 60%;
+  left: 15%;
+  background: rgba(99, 102, 241, 0.15);
+}
+
+.cta-float-2 {
+  width: 24px;
+  height: 24px;
+  top: 30%;
+  right: 20%;
+  background: rgba(37, 99, 235, 0.2);
+}
+
+.cta-float-3 {
+  width: 60px;
+  height: 60px;
+  bottom: 20px;
+  right: 15%;
+  background: rgba(59, 130, 246, 0.08);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .cta-robot {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+  
+  .cta-robot-left {
+    top: 15px;
+    left: 15px;
+  }
+  
+  .cta-robot-right {
+    top: 15px;
+    right: 15px;
+  }
+  
+  .cta-hero {
+    padding: 3rem 1.5rem !important;
+  }
+}
+
+      /* Footer */
+      .footer {
+        background: #0b1220;
+        color: #cbd5e1;
+      }
+      .footer .brand { color: #fff; font-weight: 800; }
+      .footer a { color: #cbd5e1; text-decoration: none; }
+      .footer a:hover { color: #fff; }
+    </style>
+  </head>
+
+  <body>
+     
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#">
+          <i class="bi bi-robot me-2 text-primary"></i> MEDMIND
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"
+                aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div id="nav" class="collapse navbar-collapse">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+            <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+            <li class="nav-item"><a class="nav-link" href="#how">How it works</a></li>
+            <li class="nav-item"><a class="nav-link" href="remedies.html">Remedies</a></li>
+            <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+            <li class="nav-item ms-lg-3">
+              <a class="btn btn-outline-brand" href="feedback.html">Feedback</a>
+            </li>
+            <li class="nav-item ms-2">
+             
+             <a class="btn btn-brand" href="login.html">Get Started</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero section pb-0">
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-6">
+            <span class="badge badge-soft px-3 py-2 mb-3">
+              <i class="bi bi-stars me-1"></i> Powerful AI for Healthcare Support
+            </span>
+            <h1 class="display-5 fw-bold text-balance">
+              Transform Healthcare Conversations with MedMind AI – 
+              <span class="text-primary">Your Intelligent Medical Companion</span>
+            </h1>
+            <p class="mt-3 text-secondary">
+              Streamline symptom assessment, prioritize patient care, and provide 24/7 health support accessible in multiple languages across all platforms
+            </p>
+            <div class="d-flex gap-3 mt-4">
+              <a class="btn btn-brand btn-lg" href="http://127.0.0.1:7860" target="_blank">Start Free</a>
+
+              <a class="btn btn-outline-brand btn-lg" href="#how">Live Demo</a>
+            </div>
+
+            <div class="d-flex flex-wrap align-items-center gap-3 mt-4">
+              <div class="d-flex align-items-center text-secondary">
+                <i class="bi bi-shield-check text-primary me-2"></i>
+                <small>Conversational interface</small>
+              </div>
+              <div class="d-flex align-items-center text-secondary">
+                <i class="bi bi-clock-history text-primary me-2"></i>
+                <small>Patient-friendly design</small>
+              </div>
+              <div class="d-flex align-items-center text-secondary">
+                <i class="bi bi-lightning-charge-fill text-primary me-2"></i>
+                <small>Instant report download</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+           
+              
+              <img
+                src=".\images\chatbot.png"
+                alt="AI chatbot hero illustration"
+                class="img-fluid rounded-3"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-sm">
+        <div class="container">
+          <p class="text-center text-secondary mb-3">Helping people worldwide</p>
+          <div class="d-flex flex-wrap justify-content-center gap-3">
+            <span class="logo-pill">10K+ Symptoms Analyzed</span>
+            <span class="logo-pill">10+ Languages</span>
+            <span class="logo-pill">24/7 Available</span>
+            <span class="logo-pill">1000+ Reports Generated</span>
+            <span class="logo-pill">Real-time Analysis</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="features" class="section">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="badge badge-soft px-3 py-2 mb-2">Powerful Medical Features</span>
+          <h2 class="fw-bold">AI That Predicts, Analyzes & Guides</h2>
+          <p class="text-secondary">Intelligent healthcare conversations and accurate symptom analysis.</p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4">
+            <div class="card card-soft h-100">
+              <div class="card-body p-4">
+                <div class="feature-icon mb-3"><i class="bi bi-chat-text"></i></div>
+                <h5 class="fw-bold mb-2">Smart Symptom Analysis</h5>
+                <p class="text-secondary mb-0">
+                    Advanced AI-powered symptom checking with medical context awareness—trained on real healthcare data.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="card card-soft h-100">
+              <div class="card-body p-4">
+                <div class="feature-icon secondary mb-3"><i class="bi bi-phone"></i></div>
+                <h5 class="fw-bold mb-2">Multi‑Language Support</h5>
+                <p class="text-secondary mb-0">
+                  Available in Telugu, Kannada, English and more—breaking language barriers in healthcare access.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="card card-soft h-100">
+              <div class="card-body p-4">
+                <div class="feature-icon mb-3"><i class="bi bi-graph-up-arrow"></i></div>
+                <h5 class="fw-bold mb-2">Instant PDF Reports</h5>
+                <p class="text-secondary mb-0">
+                  Generate comprehensive health reports with symptom analysis, recommendations, and medical insights you can download instantly.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="section">
+      <div class="container">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-6 order-lg-1">
+            <div class="p-3 hero-figure shadow-soft">
+              <img
+                src="https://ideogram.ai/assets/image/lossless/response/gsv0z0OcRsq8yUxr3ytPqg"
+                alt="Product UI preview"
+                class="img-fluid rounded-3"
+              />
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <span class="badge badge-soft px-3 py-2 mb-2">How MedMind Works</span>
+            <h3 class="fw-bold">Simple Health Assessment in 3 Steps</h3>
+            <ul class="list-unstyled mt-3">
+              <li class="d-flex gap-3 mb-3">
+                <i class="bi bi-check-circle-fill check-icon fs-5 mt-1"></i>
+                <div>
+                  <div class="fw-semibold">Enter Your Information</div>
+                  <div class="text-secondary">Provide your name, age, gender, and select your preferred language (English, Telugu, Kannada)</div>
+                </div>
+              </li>
+              <li class="d-flex gap-3 mb-3">
+                <i class="bi bi-check-circle-fill check-icon fs-5 mt-1"></i>
+                <div>
+                  <div class="fw-semibold">Describe Your Symptoms</div>
+                  <div class="text-secondary">Chat naturally with our AI about your health concerns—it understands context and asks relevant follow-up questions.</div>
+                </div>
+              </li>
+              <li class="d-flex gap-3 mb-3">
+                <i class="bi bi-check-circle-fill check-icon fs-5 mt-1"></i>
+                <div>
+                  <div class="fw-semibold">Get Health Insights</div>
+                  <div class="text-secondary">Receive AI-powered symptom analysis and download a comprehensive PDF report to share with your doctor.</div>
+                </div>
+              </li>
+            </ul>
+            <div class="d-flex gap-3">
+             
+              <a class="btn btn-brand" href="login.html">Try MedMind Now</a>
+              <a class="btn btn-outline-brand" href="explore.html">Explore</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-white">
+      <div class="container">
+        <div class="text-center mb-4">
+          <span class="badge badge-soft px-3 py-2 mb-2">Why Choose MedMind</span>
+          <h3 class="fw-bold">Healthcare Intelligence That Understands You</h3>
+        </div>
+
+        <div class="row g-3 g-md-4">
+          <div class="col-6 col-lg">
+            <div class="card card-soft h-100 text-center p-3">
+              <i class="bi bi-speedometer2 text-primary fs-4 mb-2"></i>
+              <div class="fw-semibold">Medically Trained AI</div>
+              <small class="text-secondary">Specialized healthcare knowledge base with clinical accuracy.</small>
+            </div>
+          </div>
+          <div class="col-6 col-lg">
+            <div class="card card-soft h-100 text-center p-3">
+              <i class="bi bi-headset text-primary fs-4 mb-2"></i>
+              <div class="fw-semibold">Multilingual Care</div>
+              <small class="text-secondary">Breaking language barriers in healthcare access</small>
+            </div>
+          </div>
+          <div class="col-6 col-lg">
+            <div class="card card-soft h-100 text-center p-3">
+              <i class="bi bi-cash-coin text-primary fs-4 mb-2"></i>
+              <div class="fw-semibold">Instant Health Reports</div>
+              <small class="text-secondary">Professional PDF summaries ready for your doctor</small>
+            </div>
+          </div>
+          <div class="col-6 col-lg">
+            <div class="card card-soft h-100 text-center p-3">
+              <i class="bi bi-patch-check text-primary fs-4 mb-2"></i>
+              <div class="fw-semibold">Privacy-First Design</div>
+              <small class="text-secondary">HIPAA-compliant security with encrypted patient data</small>
+            </div>
+          </div>
+          <div class="col-6 col-lg">
+            <div class="card card-soft h-100 text-center p-3">
+              <i class="bi bi-people text-primary fs-4 mb-2"></i>
+              <div class="fw-semibold">24/7 Health Companion</div>
+              <small class="text-secondary">No appointments needed - get health insights anytime</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+   
+    
+    <section class="section bg-white">
+      <div class="container">
+        <div class="text-center mb-4">
+          <span class="badge badge-soft px-3 py-2 mb-2">Testimonials</span>
+          <h3 class="fw-bold">Trusted by Patients Worldwide</h3>
+        </div>
+
+        <div id="quotes" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="row g-4">
+                <div class="col-md-4">
+                  <div class="card card-soft h-100 p-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                      <div class="avatar"></div>
+                      <div>
+                        <div class="fw-semibold">Akshara Reddy</div>
+                        <small class="text-secondary">Working Mother</small>
+                      </div>
+                    </div>
+                    <p class="mb-0">MedMind helped me understand my symptoms at 2 AM when clinics were closed. The multilingual support was perfect for my elderly parents.</p>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card card-soft h-100 p-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                      <div class="avatar"></div>
+                      <div>
+                        <div class="fw-semibold">Dr. Michael</div>
+                        <small class="text-secondary">Family Physician</small>
+                      </div>
+                    </div>
+                    <p class="mb-0">I recommend MedMind to patients for initial symptom assessment. The detailed PDF reports help focus our consultations effectively.</p>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card card-soft h-100 p-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                      <div class="avatar"></div>
+                      <div>
+                        <div class="fw-semibold">Raj Patel</div>
+                        <small class="text-secondary">Engineer</small>
+                      </div>
+                    </div>
+                    <p class="mb-0">The Telugu and Kannada language options made healthcare accessible to our diverse community members.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="row g-4">
+                <div class="col-md-4">
+                  <div class="card card-soft h-100 p-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                      <div class="avatar"></div>
+                      <div>
+                        <div class="fw-semibold">Priya Singh</div>
+                        <small class="text-secondary">College Student</small>
+                      </div>
+                    </div>
+                    <p class="mb-0">As a student with limited healthcare access, MedMind gives me confidence about when to seek immediate care versus waiting.</p>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card card-soft h-100 p-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                      <div class="avatar"></div>
+                      <div>
+                        <div class="fw-semibold">Ahmed Hassan</div>
+                        <small class="text-secondary">Remote Worker</small>
+                      </div>
+                    </div>
+                    <p class="mb-0">The follow-up questions help me explain symptoms better to doctors. It's like having a medical assistant available 24/7.</p>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card card-soft h-100 p-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                      <div class="avatar"></div>
+                      <div>
+                        <div class="fw-semibold">Jessica</div>
+                        <small class="text-secondary">Senior Care Coordinator</small>
+                      </div>
+                    </div>
+                    <p class="mb-0">MedMind's accurate symptom analysis and clear recommendations have improved our patient triage process significantly.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-center gap-3 mt-4">
+            <button class="btn btn-outline-brand btn-sm" data-bs-target="#quotes" data-bs-slide="prev">
+              <i class="bi bi-arrow-left"></i>
+            </button>
+            <button class="btn btn-outline-brand btn-sm" data-bs-target="#quotes" data-bs-slide="next">
+              <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     
+    <section id="faq" class="section">
+      <div class="container">
+        <div class="text-center mb-4">
+          <span class="badge badge-soft px-3 py-2 mb-2">FAQ</span>
+          <h3 class="fw-bold">Answers to Your Questions</h3>
+        </div>
+
+        <div class="accordion card-soft" id="faqAcc">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q1">
+               Is MedMind a replacement for seeing a doctor?
+              </button>
+            </h2>
+            <div id="q1" class="accordion-collapse collapse show" data-bs-parent="#faqAcc">
+              <div class="accordion-body">
+                No, MedMind is a symptom assessment tool that helps you understand your symptoms and provides guidance on when to seek medical care. Always consult healthcare professionals for proper diagnosis and treatment.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q2">
+              Is MedMind free to use?
+              </button>
+            </h2>
+            <div id="q2" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+              <div class="accordion-body">
+                Yes—MedMind is completely free to use. No registration or payment required to assess your symptoms and get health guidance.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q3">
+              Which languages are supported?
+              </button>
+            </h2>
+            <div id="q3" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+              <div class="accordion-body">
+              MedMind supports English, Telugu, and Kannada  and many more languages to serve diverse communities with their native language preferences.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q4">
+                 How accurate are the symptom assessments?
+              </button>
+            </h2>
+            <div id="q4" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+              <div class="accordion-body">
+                 MedMind uses advanced AI trained on medical datasets to provide accurate symptom analysis. However, results are for informational purposes and should not replace professional medical advice.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q5">
+             Is my health information secure?
+              </button>
+            </h2>
+            <div id="q5" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+              <div class="accordion-body">
+               Yes, MedMind prioritizes your privacy. We follow strict data protection protocols and do not store personal health information permanently.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+   <section id="cta" class="section">
+  <div class="container">
+    <div class="cta-hero position-relative p-5 shadow-soft overflow-hidden">
+      <!-- Robot decorations -->
+      <div class="cta-robot cta-robot-left">
+        <i class="bi bi-robot"></i>
+      </div>
+      <div class="cta-robot cta-robot-right">
+        <i class="bi bi-robot"></i>
+      </div>
+      
+      <!-- Floating elements -->
+      <div class="cta-float cta-float-1"></div>
+      <div class="cta-float cta-float-2"></div>
+      <div class="cta-float cta-float-3"></div>
+      
+      <div class="row align-items-center justify-content-center text-center g-4">
+        <div class="col-lg-8">
+          <span class="badge badge-soft px-3 py-2 mb-3">
+  <i class="bi bi-heart-pulse me-1"></i> Smart Healthcare
+</span>
+<h2 class="fw-bold mb-3">Ready to Experience Intelligent<br>Healthcare Support?</h2>
+<p class="text-secondary mb-4">Get instant symptom analysis, multilingual health guidance, and professional medical reports with MedMind AI.</p>
+
+          
+          <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+            <a class="btn btn-brand btn-lg px-4" href="login.html">Get Started</a>
+            <a class="btn btn-outline-brand btn-lg px-4" href="#how">Live Demo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <footer class="footer section">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="brand mb-2">
+              <i class="bi bi-robot me-2"></i>ChatWise
+            </div>
+            <p class="mb-3">Conversational AI that feels human. Automate support and convert visitors into customers.</p>
+            <div class="d-flex gap-3">
+              <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+              <a href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-2">
+            <div class="fw-semibold text-white mb-2">Navigate</div>
+            <ul class="list-unstyled d-grid gap-2">
+              <li><a href="#features">Features</a></li>
+              <li><a href="#how">How it works</a></li>
+              <li><a href="#pricing">Pricing</a></li>
+              <li><a href="#faq">FAQ</a></li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md-2">
+            <div class="fw-semibold text-white mb-2">Company</div>
+            <ul class="list-unstyled d-grid gap-2">
+              <li><a href="#">About</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Docs</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-4" id="contact">
+            <div class="fw-semibold text-white mb-2">Newsletter</div>
+            <form class="d-flex gap-2">
+              <input type="email" class="form-control" placeholder="Your email" aria-label="Email" />
+              <button class="btn btn-accent" type="submit">Subscribe</button>
+            </form>
+            <small class="d-block mt-2 text-secondary">We care about your data in our privacy policy.</small>
+          </div>
+        </div>
+
+        <hr class="border-secondary-subtle my-4" />
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+          <small>© <span id="year"></span> ChatWise Inc. All rights reserved.</small>
+          <div class="d-flex gap-3">
+            <a href="#">Terms</a>
+            <a href="#">Privacy</a>
+            <a href="#">Security</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      // Set current year (no external JS libraries)
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,390 @@
+
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MedMind - Feedback</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      :root{
+        --brand-primary: #2563eb;  /* blue */
+        --brand-accent:  #f59e0b;  /* amber */
+        --brand-accent-2:#10b981;  /* emerald */
+        --brand-ink:     #0f172a;  /* slate-900 */
+        --brand-surface: #ffffff;  /* white */
+        --rounded: 1rem;
+      }
+
+      body{
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        color: var(--brand-ink);
+        background:
+          radial-gradient(1200px 600px at -5% -10%, rgba(37,99,235,.08), transparent 60%),
+          radial-gradient(1200px 600px at 105% 110%, rgba(16,185,129,.08), transparent 60%),
+          #f8fafc;
+      }
+
+      /* Navbar */
+      .navbar{
+        backdrop-filter: saturate(120%) blur(8px);
+        background-color: rgba(255,255,255,.7);
+        border-bottom: 1px solid rgba(15,23,42,.06);
+      }
+
+      /* Hero */
+      .hero {
+        padding-block: clamp(3rem, 6vw, 6rem);
+      }
+      .badge-soft{
+        background: rgba(37, 99, 235, .12);
+        color: var(--brand-primary);
+        border: 1px solid rgba(37,99,235,.2);
+      }
+      .hero-blob{
+        position: absolute; inset: auto -80px -80px auto;
+        width: 320px; height: 320px; border-radius: 50%;
+        background: radial-gradient(circle at 30% 30%, var(--brand-primary), #6ea8fe);
+        filter: blur(60px); opacity:.15; pointer-events:none;
+      }
+
+      /* Card + form */
+      .card{
+        border: 1px solid rgba(15,23,42,.06);
+        box-shadow: 0 10px 30px rgba(2,8,23,.06);
+        border-radius: var(--rounded);
+      }
+      .btn-brand{
+        --bs-btn-bg: var(--brand-primary);
+        --bs-btn-border-color: var(--brand-primary);
+        --bs-btn-hover-bg: #1d4ed8;
+        --bs-btn-hover-border-color: #1d4ed8;
+        --bs-btn-focus-shadow-rgb: 37,99,235;
+        --bs-btn-active-bg: #1e40af;
+        --bs-btn-active-border-color: #1e40af;
+        color: #fff;
+        border-radius: calc(var(--rounded) - .25rem);
+      }
+      .btn-ghost{
+        color: var(--brand-primary);
+        background: rgba(37,99,235,.08);
+        border: 1px solid rgba(37,99,235,.2);
+        border-radius: calc(var(--rounded) - .25rem);
+      }
+
+      /* Rating stars (accessible radios) */
+      .rating{
+        display: inline-flex; flex-direction: row-reverse; gap: .4rem;
+      }
+      .rating input{ display:none; }
+      .rating label{
+        font-size: 1.6rem; cursor: pointer; color: #cbd5e1; /* slate-300 */
+        transition: color .15s ease-in-out, transform .15s ease-in-out;
+      }
+      .rating label:hover,
+      .rating label:hover ~ label{ color: var(--brand-accent); transform: translateY(-2px); }
+      .rating input:checked ~ label{ color: var(--brand-accent); }
+      .form-range::-webkit-slider-thumb{
+        background-color: var(--brand-primary);
+      }
+
+      /* Section titles */
+      .section-title{
+        letter-spacing: .4px;
+      }
+
+      /* Footer */
+      footer{
+        border-top: 1px solid rgba(15,23,42,.06);
+        background: #fff;
+      }
+
+      /* Utilities */
+      .text-balance{ text-wrap: balance; }
+      .loading { display: none; }
+    </style>
+  </head>
+
+  <body>
+    
+    <nav class="navbar navbar-expand-lg sticky-top">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#">
+          <span class="text-primary">MED</span><span class="text-body-secondary">MIND</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nav">
+          <ul class="navbar-nav ms-auto align-items-lg-center">
+            <li class="nav-item"><a class="nav-link active" href="login.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+            <li class="nav-item ms-lg-3"><a class="btn btn-ghost px-3" href="#form">Leave feedback</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero position-relative">
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-6">
+            <span class="badge rounded-pill badge-soft mb-3">We value your voice</span>
+            <h1 class="display-5 fw-bolder text-balance mb-3">
+              Feedback that helps us build better experiences
+            </h1>
+            <p class="fs-5 text-secondary mb-4">
+              Share your thoughts about MedMind in under a minute. Your feedback helps us improve our AI symptom checker.
+            </p>
+            <div class="d-flex gap-2">
+              <a href="#form" class="btn btn-brand btn-lg px-4">Give Feedback</a>
+              <a href="#why" class="btn btn-outline-secondary btn-lg px-4">Why it matters</a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="card overflow-hidden">
+              <img
+                src="https://media.istockphoto.com/id/1460275041/photo/customer-satisfaction-survey-concept-5-star-satisfaction-service-experience-rating-online.jpg?s=612x612&w=0&k=20&c=jDEeDVdwFFhlnUP4Tc0frcKbQUIEm9ssZ0W9-yJUBJg="
+                class="img-fluid"
+                alt="Illustration of feedback with rating stars on phone and tablet"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="hero-blob"></span>
+    </header>
+    
+    <section id="why" class="py-5">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <span class="badge text-bg-warning-subtle text-warning-emphasis mb-2">Fast</span>
+                <h3 class="h5">Takes less than 60 seconds</h3>
+                <p class="text-secondary mb-0">Short form with optional details keeps things easy and respectful of your time.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <span class="badge text-bg-success-subtle text-success-emphasis mb-2">Actionable</span>
+                <h3 class="h5">We turn feedback into updates</h3>
+                <p class="text-secondary mb-0">Submissions are reviewed weekly and help improve MedMind's accuracy and user experience.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <span class="badge text-bg-primary-subtle text-primary-emphasis mb-2">Transparent</span>
+                <h3 class="h5">You'll hear back</h3>
+                <p class="text-secondary mb-0">Opt in to email updates so you know when your idea ships in future MedMind versions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <main id="form" class="py-5">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="card">
+              <div class="card-body p-4 p-md-5">
+                <h2 class="section-title h3 mb-1">Share your feedback</h2>
+                <p class="text-secondary mb-4">Your responses help us improve MedMind. All feedback is anonymous unless you choose to leave your email.</p>
+
+                <form id="feedbackForm" class="row g-4" novalidate>
+                  <div class="col-12">
+                    <label class="form-label fw-semibold">Overall experience with MedMind</label>
+                    <div class="rating" role="radiogroup" aria-label="Rate your experience from 1 to 5 stars">
+                      <input type="radio" name="rating" id="rate5" value="5" required />
+                      <label for="rate5" aria-label="5 stars">★</label>
+                      <input type="radio" name="rating" id="rate4" value="4" />
+                      <label for="rate4" aria-label="4 stars">★</label>
+                      <input type="radio" name="rating" id="rate3" value="3" />
+                      <label for="rate3" aria-label="3 stars">★</label>
+                      <input type="radio" name="rating" id="rate2" value="2" />
+                      <label for="rate2" aria-label="2 stars">★</label>
+                      <input type="radio" name="rating" id="rate1" value="1" />
+                      <label for="rate1" aria-label="1 star">★</label>
+                    </div>
+                    <div class="form-text">Required. 5 is excellent, 1 is poor.</div>
+                  </div>
+                  
+                  <div class="col-12">
+                    <label class="form-label fw-semibold d-block">How did using MedMind feel?</label>
+                    <div class="d-flex flex-wrap gap-2">
+                      <input type="checkbox" class="btn-check" id="happy" name="emotions" value="happy" />
+                      <label class="btn btn-ghost" for="happy">Happy</label>
+
+                      <input type="checkbox" class="btn-check" id="confused" name="emotions" value="confused" />
+                      <label class="btn btn-ghost" for="confused">Confused</label>
+
+                      <input type="checkbox" class="btn-check" id="surprised" name="emotions" value="surprised" />
+                      <label class="btn btn-ghost" for="surprised">Surprised</label>
+
+                      <input type="checkbox" class="btn-check" id="frustrated" name="emotions" value="frustrated" />
+                      <label class="btn btn-ghost" for="frustrated">Frustrated</label>
+                    </div>
+                  </div>
+                  
+                  <div class="col-12">
+                    <label for="ease" class="form-label fw-semibold">Ease of use</label>
+                    <input type="range" class="form-range" id="ease" name="easeOfUse" min="1" max="5" value="4" aria-describedby="easeHelp" />
+                    <div id="easeHelp" class="form-text">Slide toward the right if MedMind felt easy to use.</div>
+                  </div>
+                  
+                  <div class="col-12">
+                    <label for="message" class="form-label fw-semibold">Tell us more about your MedMind experience</label>
+                    <textarea id="message" name="message" class="form-control" rows="5" placeholder="What worked well? What could we improve? How accurate were the symptom predictions?" required></textarea>
+                  </div> 
+                  
+                  <div class="col-md-6">
+                    <label for="name" class="form-label">Name (optional)</label>
+                    <input id="name" name="name" type="text" class="form-control" placeholder="Jane Doe" />
+                  </div>
+                  
+                  <div class="col-md-6">
+                    <label for="email" class="form-label">Email (optional)</label>
+                    <input id="email" name="email" type="email" class="form-control" placeholder="you@example.com" />
+                  </div>
+
+                  <div class="col-12">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="wantsUpdates" id="updates" />
+                      <label class="form-check-label" for="updates">
+                        Email me about MedMind updates related to my feedback
+                      </label>
+                    </div>
+                  </div>
+                  
+                  <div id="message-alert" class="alert" style="display: none;"></div>
+                  
+                  <div class="col-12 d-flex gap-2">
+                    <button type="submit" class="btn btn-brand px-4">
+                      <span class="loading spinner-border spinner-border-sm me-2" role="status"></span>
+                      <span class="btn-text">Submit Feedback</span>
+                    </button>
+                    <button type="reset" class="btn btn-outline-secondary">Reset</button>
+                  </div>
+                  
+                  <p class="small text-secondary mb-0">By submitting, you agree to our respectful use of your feedback to improve MedMind.</p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+    
+    <script>
+      const API_BASE_URL = 'http://localhost:5000/api';
+      
+      document.getElementById('feedbackForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const loading = submitBtn.querySelector('.loading');
+        const btnText = submitBtn.querySelector('.btn-text');
+        const messageDiv = document.getElementById('message-alert');
+        
+        // Get form values
+        const rating = formData.get('rating');
+        const message = formData.get('message');
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const easeOfUse = formData.get('easeOfUse');
+        const wantsUpdates = formData.has('wantsUpdates');
+        
+        // Get selected emotions
+        const emotions = [];
+        const emotionCheckboxes = this.querySelectorAll('input[name="emotions"]:checked');
+        emotionCheckboxes.forEach(checkbox => emotions.push(checkbox.value));
+        
+        // Validate required fields
+        if (!rating || !message) {
+          messageDiv.className = 'alert alert-danger';
+          messageDiv.textContent = 'Please provide a rating and feedback message.';
+          messageDiv.style.display = 'block';
+          return;
+        }
+        
+        // Show loading state
+        loading.style.display = 'inline-block';
+        btnText.textContent = 'Submitting...';
+        submitBtn.disabled = true;
+        messageDiv.style.display = 'none';
+        
+        try {
+          const response = await fetch(`${API_BASE_URL}/feedback`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              rating: parseInt(rating),
+              emotions,
+              easeOfUse: parseInt(easeOfUse),
+              message,
+              name,
+              email,
+              wantsUpdates
+            })
+          });
+          
+          const data = await response.json();
+          
+          if (data.success) {
+            // Show success message
+            messageDiv.className = 'alert alert-success';
+            messageDiv.textContent = 'Thank you! Your feedback has been submitted successfully and will help us improve MedMind.';
+            messageDiv.style.display = 'block';
+            
+            // Reset form after successful submission
+            this.reset();
+            
+            // Scroll to message
+            messageDiv.scrollIntoView({ behavior: 'smooth' });
+          } else {
+            // Show error message
+            messageDiv.className = 'alert alert-danger';
+            messageDiv.textContent = data.message || 'Failed to submit feedback. Please try again.';
+            messageDiv.style.display = 'block';
+          }
+        } catch (error) {
+          console.error('Feedback submission error:', error);
+          messageDiv.className = 'alert alert-danger';
+          messageDiv.textContent = 'Network error. Please check if the server is running and try again.';
+          messageDiv.style.display = 'block';
+        } finally {
+          // Hide loading state
+          loading.style.display = 'none';
+          btnText.textContent = 'Submit Feedback';
+          submitBtn.disabled = false;
+        }
+      });
+      
+      // Reset form handler
+      document.querySelector('button[type="reset"]').addEventListener('click', function() {
+        document.getElementById('message-alert').style.display = 'none';
+      });
+    </script>
+  </body>
+</html>

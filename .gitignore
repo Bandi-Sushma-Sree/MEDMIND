@@ -1,0 +1,16 @@
+# Ignore datasets
+*.csv
+*.pkl
+*.env
+
+# Ignore presentations and diagrams
+*.pptx
+*.png
+
+# Ignore log folders
+logs/
+wandb/
+.gradio/
+
+# Ignore big model directories
+medical_symptom_checker_v1/
