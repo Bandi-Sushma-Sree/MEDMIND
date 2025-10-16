@@ -14,3 +14,7 @@ wandb/
 
 # Ignore big model directories
 medical_symptom_checker_v1/
+
+# Ignore Node.js dependencies and environment files
+node_modules/
+.env
