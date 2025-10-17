@@ -62,7 +62,7 @@ pandas>=2.0.0
 
 # Translation and Language Processing
 deep-translator>=1.11.4
-googletrans==4.0.0rc1
+
 langdetect>=1.0.9
 
 # Medical and NLP Libraries
