@@ -63,7 +63,7 @@ def start_gradio():
         time.sleep(2)
     
     # Redirect to the Gradio interface
-    return redirect('http://localhost:7860')
+    return redirect('https://medmind-chatbot.onrender.com')
 
 # Serve images from the images folder
 @app.route('/images/<filename>')
