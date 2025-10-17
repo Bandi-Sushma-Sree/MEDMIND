@@ -8,7 +8,7 @@ torch>=2.0.0
 transformers>=4.30.0
 numpy>=1.24.0
 pandas>=2.0.0
-PYTHON_VERSION = 3.12.8
+audioop-lts==1.0.3
 
 # Google AI
 google-generativeai
