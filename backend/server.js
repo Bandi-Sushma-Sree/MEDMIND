@@ -9,10 +9,19 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 
 // Middleware
+// Updated CORS for deployed services:
 app.use(cors({
-    origin: ["http://localhost:3000", "http://localhost:5000", "http://127.0.0.1:5000"],
+    origin: [
+        "http://localhost:3000", 
+        "http://localhost:5000", 
+        "http://127.0.0.1:5000",
+        "https://medmind-flask.onrender.com",
+        "https://medmind-chatbot.onrender.com",
+        "https://medmind-vte7.onrender.com"
+    ],
     credentials: true
 }));
+
 app.use(express.json({ limit: '10mb' }));
 
 // MongoDB Atlas Connection - FIXED FOR NODE.JS 22
@@ -564,8 +573,8 @@ app.all('/*splat', (req, res) => {
 // Start server
 app.listen(PORT, () => {
     console.log(`🚀 MedMind Backend Server running on port ${PORT}`);
-    console.log(`🌐 API Base URL: http://localhost:${PORT}`);
-    console.log(`📊 Health Check: http://localhost:${PORT}/`);
+    console.log(`🌐 API Base URL: https://medmind-api.onrender.com`);
+    console.log(`📊 Health Check: https://medmind-api.onrender.com/`);
 });
 
 // Graceful shutdown
