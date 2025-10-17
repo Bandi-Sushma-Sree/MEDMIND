@@ -1763,7 +1763,7 @@ def create_complete_medmind_app():
                         
                     ],
                     cache_examples=False,
-                    type="messages"
+                    
                 )
 
         # Disclaimer

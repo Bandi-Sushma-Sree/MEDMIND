@@ -123,7 +123,7 @@
         </button>
         <div class="collapse navbar-collapse" id="nav">
           <ul class="navbar-nav ms-auto align-items-lg-center">
-            <li class="nav-item"><a class="nav-link active" href="login.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link active" href="/login">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="#">About</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
             <li class="nav-item ms-lg-3"><a class="btn btn-ghost px-3" href="#form">Leave feedback</a></li>
@@ -294,9 +294,9 @@
             crossorigin="anonymous"></script>
     
     <script>
-      const API_BASE_URL = 'http://localhost:5000/api';
-      
-      document.getElementById('feedbackForm').addEventListener('submit', async function(e) {
+    const API_BASE_URL = 'http://localhost:5001/api';  // CHANGED PORT
+    
+    document.getElementById('feedbackForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         
         const formData = new FormData(this);
@@ -320,10 +320,10 @@
         
         // Validate required fields
         if (!rating || !message) {
-          messageDiv.className = 'alert alert-danger';
-          messageDiv.textContent = 'Please provide a rating and feedback message.';
-          messageDiv.style.display = 'block';
-          return;
+            messageDiv.className = 'alert alert-danger';
+            messageDiv.textContent = 'Please provide a rating and feedback message.';
+            messageDiv.style.display = 'block';
+            return;
         }
         
         // Show loading state
@@ -333,58 +333,59 @@
         messageDiv.style.display = 'none';
         
         try {
-          const response = await fetch(`${API_BASE_URL}/feedback`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              rating: parseInt(rating),
-              emotions,
-              easeOfUse: parseInt(easeOfUse),
-              message,
-              name,
-              email,
-              wantsUpdates
-            })
-          });
-          
-          const data = await response.json();
-          
-          if (data.success) {
-            // Show success message
-            messageDiv.className = 'alert alert-success';
-            messageDiv.textContent = 'Thank you! Your feedback has been submitted successfully and will help us improve MedMind.';
-            messageDiv.style.display = 'block';
+            const response = await fetch(`${API_BASE_URL}/feedback`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    rating: parseInt(rating),
+                    emotions,
+                    easeOfUse: parseInt(easeOfUse),
+                    message,
+                    name,
+                    email,
+                    wantsUpdates
+                })
+            });
             
-            // Reset form after successful submission
-            this.reset();
+            const data = await response.json();
             
-            // Scroll to message
-            messageDiv.scrollIntoView({ behavior: 'smooth' });
-          } else {
-            // Show error message
-            messageDiv.className = 'alert alert-danger';
-            messageDiv.textContent = data.message || 'Failed to submit feedback. Please try again.';
-            messageDiv.style.display = 'block';
-          }
+            if (data.success) {
+                // Show success message
+                messageDiv.className = 'alert alert-success';
+                messageDiv.textContent = 'Thank you! Your feedback has been submitted successfully and will help us improve MedMind.';
+                messageDiv.style.display = 'block';
+                
+                // Reset form after successful submission
+                this.reset();
+                
+                // Scroll to message
+                messageDiv.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                // Show error message
+                messageDiv.className = 'alert alert-danger';
+                messageDiv.textContent = data.message || 'Failed to submit feedback. Please try again.';
+                messageDiv.style.display = 'block';
+            }
         } catch (error) {
-          console.error('Feedback submission error:', error);
-          messageDiv.className = 'alert alert-danger';
-          messageDiv.textContent = 'Network error. Please check if the server is running and try again.';
-          messageDiv.style.display = 'block';
+            console.error('Feedback submission error:', error);
+            messageDiv.className = 'alert alert-danger';
+            messageDiv.textContent = 'Network error. Please make sure MedMind backend is running on port 5001.';  // IMPROVED ERROR MESSAGE
+            messageDiv.style.display = 'block';
         } finally {
-          // Hide loading state
-          loading.style.display = 'none';
-          btnText.textContent = 'Submit Feedback';
-          submitBtn.disabled = false;
+            // Hide loading state
+            loading.style.display = 'none';
+            btnText.textContent = 'Submit Feedback';
+            submitBtn.disabled = false;
         }
-      });
-      
-      // Reset form handler
-      document.querySelector('button[type="reset"]').addEventListener('click', function() {
+    });
+    
+    // Reset form handler
+    document.querySelector('button[type="reset"]').addEventListener('click', function() {
         document.getElementById('message-alert').style.display = 'none';
-      });
-    </script>
+    });
+</script>
+
   </body>
 </html>
