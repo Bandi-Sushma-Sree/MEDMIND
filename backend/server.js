@@ -16,7 +16,7 @@ app.use(cors({
         "http://localhost:5000", 
         "http://127.0.0.1:5000",
         "https://medmind-flask.onrender.com",
-        "https://medmind-chatbot.onrender.com",
+        "https://medmind-chatbot-gztj.onrender.com/",
         "https://medmind-vte7.onrender.com"
     ],
     credentials: true
